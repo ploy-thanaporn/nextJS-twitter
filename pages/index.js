@@ -22,7 +22,7 @@ export default function Home() {
         <Feed />
 
         {/* widgets */}
-        {/* <Widget /> */}
+        <Widget />
 
         {/* modal */}
         {/* <Modal /> */}
