@@ -9,7 +9,7 @@ const Widget = () => {
           <input
             type="text"
             placeholder="Search Twitter"
-            className="absolute inset-0 rounded-full pl-11 border-gray-500 text-gray-700 focus:shadow-lg bg-gray-100"
+            className="absolute inset-0 rounded-full pl-11 border-gray-500 text-gray-700 focus:shadow-lg focus:bg-white bg-gray-100"
           />
         </div>
       </div>
