@@ -11,6 +11,16 @@ export default NextAuth({
     // ...add more providers here
   ],
   pages: {
-    signin: "/auth/sign-in",
+    signin: "/auth/signin",
+  },
+  callbacks: {
+    async session({ session, token }) {
+      session.user.username = session.user.name
+        .split(" ")
+        .join("")
+        .toLocaleLowerCase();
+      session.user.uid = token.sub;
+      return session;
+    },
   },
 });
