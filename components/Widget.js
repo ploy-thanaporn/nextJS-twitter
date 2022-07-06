@@ -50,7 +50,7 @@ const Widget = ({ newsResults, randomUserResults }) => {
               </h4>
               <h5 className="text-[13px] text-gray-500 truncate">{`${user.name.first} ${user.name.last}`}</h5>
             </div>
-            <button className="bg-blue-400 text-white text-sm px-3.5 py-1.5 rounded-full font-bold ml-auto">
+            <button className="bg-black text-white text-sm px-3.5 py-1.5 rounded-full font-bold ml-auto">
               Follow
             </button>
           </div>
