@@ -1,6 +1,6 @@
 import { getProviders, signIn } from "next-auth/react";
 
-const SignIn = ({ providers }) => {
+export default function Signin({ providers }) {
   return (
     <div className="flex justify-center mt-20 space-x-4">
       <img
@@ -21,7 +21,7 @@ const SignIn = ({ providers }) => {
             </p>
             <button
               className="bg-red-400 rounded-lg p-3 text-white hover:bg-red-500"
-              onClick={() => signIn(providers.id, { callbackUrl: "/" })}
+              onClick={() => signIn(provider.id, { callbackUrl: "/" })}
             >
               Sign in with {provider.name}
             </button>
@@ -30,9 +30,7 @@ const SignIn = ({ providers }) => {
       </div>
     </div>
   );
-};
-
-export default SignIn;
+}
 
 export async function getServerSideProps() {
   const providers = await getProviders();
