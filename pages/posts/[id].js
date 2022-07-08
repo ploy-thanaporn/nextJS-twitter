@@ -7,7 +7,14 @@ import Widget from "../../components/Widget";
 import Post from "../../components/Post";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
-import { doc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
+import Comment from "../../components/comment";
 
 // const Post = () => {
 //   const router = useRouter();
@@ -19,11 +26,24 @@ export default function PostPage({ newsResults, randomUserResults }) {
   const router = useRouter();
   const { id } = router.query;
   const [post, setPost] = useState();
+  const [comments, setComments] = useState([]);
 
+  // get the post data
   useEffect(
     () => onSnapshot(doc(db, "posts", id), (snapshot) => setPost(snapshot)),
     [db, id]
   );
+
+  // get comments of the post
+  useEffect(() => {
+    onSnapshot(
+      query(
+        collection(db, "posts", id, "comments"),
+        orderBy("timestamp", "desc")
+      ),
+      (snapshot) => setComments(snapshot.docs)
+    );
+  }, [db, id]);
 
   return (
     <div>
@@ -49,6 +69,20 @@ export default function PostPage({ newsResults, randomUserResults }) {
           </div>
 
           <Post id={id} post={post} />
+
+          {comments.length > 0 && (
+            <div className="">
+              {comments.map((comment) => {
+                return (
+                  <Comment
+                    key={comment.id}
+                    id={comment.id}
+                    comment={comment.data()}
+                  />
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* widgets */}
